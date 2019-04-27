@@ -23,6 +23,10 @@ public class PlayerRobot : MonoBehaviour
             Vector3 move = new Vector3(xMove, 0, 0);
 
             transform.position += move;
+
+            Vector3 scale = transform.localScale;
+            scale.x = Mathf.Abs(scale.x) * direction;
+            transform.localScale = scale;
         }
     }
 }
