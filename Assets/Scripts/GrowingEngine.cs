@@ -5,6 +5,8 @@ public class GrowingEngine : Receiver
 {
     public float maxEnergy;
     public float _energy;
+    public float _energyDrain;
+    public EnergyModule energyModule;
 
     public override void OnReloading(float energy)
     {
@@ -14,13 +16,31 @@ public class GrowingEngine : Receiver
         {
             _energy = maxEnergy;
         }
+
+        energyModule.SetEnergy(_energy / maxEnergy);
     }
 
     public override void Actualize(float dt)
     {
-        if(_energy > 0)
+        //if(_energy > 0)
+        //{
+        //    Debug.Log("Plant Grow");
+        //}
+    }
+
+    public bool RequestWater(float dt)
+    {
+        float required = _energyDrain * dt;
+
+        if(required < _energy)
         {
-            Debug.Log("Plant Grow");
+            _energy -= required;
+            energyModule.SetEnergy(_energy / maxEnergy);
+            return true;
         }
+
+        _energy = 0;
+        energyModule.SetEnergy(_energy / maxEnergy);
+        return false;
     }
 }
