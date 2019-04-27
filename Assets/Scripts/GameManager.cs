@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
+    [SerializeField] PlayerRobot _player;
+
 	void Update () {
-		
+        float dt = Time.deltaTime;
+
+        _player.Actualize(dt);
+        ReceiverManager.instance.Actualize(dt);
 	}
 }
