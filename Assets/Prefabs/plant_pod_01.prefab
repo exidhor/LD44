@@ -255,7 +255,7 @@ MonoBehaviour:
   _sizeCollider: {x: 0.23, y: 1}
   maxEnergy: 20
   _energy: 0
-  _energyDrain: 3
+  _energyDrain: 1
   energyModule: {fileID: 114111111720476964}
 --- !u!212 &212315499062412588
 SpriteRenderer:

@@ -61,7 +61,7 @@ public class Plant : MonoBehaviour
     {
         HandleRegeneration(dt);
 
-        if (_currentEvolveIndex >= _evolves.Length)
+        if (_currentEvolveIndex >= _evolves.Length - 1)
             return;
 
         _currentGrowingTime += dt;
