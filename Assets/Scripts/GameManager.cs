@@ -11,5 +11,7 @@ public class GameManager : MonoBehaviour {
 
         _player.Actualize(dt);
         ReceiverManager.instance.Actualize(dt);
+        EnergyModuleManager.instance.Actualize();
+        PlantManager.instance.Actualize(dt);
 	}
 }
