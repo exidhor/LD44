@@ -256,7 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _frontFactor: 0.2
   _midFactor: -0.2
-  _farFactor: -0.8
+  _farFactor: -0.13333334
 --- !u!114 &114814280895200936
 MonoBehaviour:
   m_ObjectHideFlags: 1
