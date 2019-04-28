@@ -61,7 +61,7 @@ MonoBehaviour:
   - _name: run
     _loop: 1
     _data:
-      _spriteTime: 10
+      _spriteTime: 0.1
       _sprites:
       - {fileID: 21300000, guid: 296e8fa89b7f5432889aaa27f3c02544, type: 3}
       - {fileID: 21300000, guid: 5cd72bf6c31bc42ba90bde97fe6099b4, type: 3}
@@ -70,15 +70,42 @@ MonoBehaviour:
   - _name: reload
     _loop: 1
     _data:
-      _spriteTime: 10
+      _spriteTime: 0.1
       _sprites:
-      - {fileID: 21300000, guid: 979235b2a7ee24c27a9e161ffa5a0c8e, type: 3}
+      - {fileID: 21300000, guid: 039a2077a4a76ec4a927b70df0458048, type: 3}
+      - {fileID: 21300000, guid: 55b8fd2a0b290fc46a26670cb2bd7df5, type: 3}
+      - {fileID: 21300000, guid: c3f5cea8205b61a438e35751e4948bb7, type: 3}
+      - {fileID: 21300000, guid: afa270ad0ee01de45b22c42e747ab27d, type: 3}
+      - {fileID: 21300000, guid: 68c2a2ae439916543a90448cbb26f7ff, type: 3}
+      - {fileID: 21300000, guid: eb18fac1cb16ab84c91777de6ef51688, type: 3}
+      - {fileID: 21300000, guid: c11c75cdd32aa1e4488566550f55f11c, type: 3}
   - _name: giveEnergy
     _loop: 1
     _data:
-      _spriteTime: 10
+      _spriteTime: 0.1
       _sprites:
-      - {fileID: 21300000, guid: 833abb90de16346ada46779e5cbc91a0, type: 3}
+      - {fileID: 21300000, guid: a2cd4dc6f58bb493094e83b3ace6a0d4, type: 3}
+      - {fileID: 21300000, guid: df39b1cc1013041e19193d7514e4c3fa, type: 3}
+      - {fileID: 21300000, guid: 1dfb6a04a1ff646e693d788faa5d2ae5, type: 3}
+      - {fileID: 21300000, guid: 722dbb857e995488b948a3442f0e2d0c, type: 3}
+  - _name: getDown
+    _loop: 0
+    _data:
+      _spriteTime: 0.05
+      _sprites:
+      - {fileID: 21300000, guid: 09cb0c9eeffbdce439b6336bb2bf9bc4, type: 3}
+      - {fileID: 21300000, guid: 609954f79c64d7e459464f93b6c4ebfe, type: 3}
+      - {fileID: 21300000, guid: 2060724a8839c1e4db5979a01d68016c, type: 3}
+      - {fileID: 21300000, guid: 0620034946677c347955c6aad6e3e903, type: 3}
+      - {fileID: 21300000, guid: 1d16b9a46e744504193b9c53f7087834, type: 3}
+      - {fileID: 21300000, guid: 0c211168e1d888e4eb099004a62bb40d, type: 3}
+      - {fileID: 21300000, guid: a5e75bc4f0b45d64fb42a0b9782667a7, type: 3}
+      - {fileID: 21300000, guid: 3d8acd687d7c1184889a21225bcc18b5, type: 3}
+      - {fileID: 21300000, guid: ce818c76ad9f389478b74ce7d3facffa, type: 3}
+      - {fileID: 21300000, guid: 14e20f1593963de4fbf6ca3ea322e6d2, type: 3}
+      - {fileID: 21300000, guid: b049c5f34f122fc4db2477ed69708a71, type: 3}
+      - {fileID: 21300000, guid: c245b53f21b20a1468dbfc8b5ec2f0c3, type: 3}
+      - {fileID: 21300000, guid: 108208714afa92f4fbb32a0147dd34d6, type: 3}
 --- !u!114 &114870155217811100
 MonoBehaviour:
   m_ObjectHideFlags: 1

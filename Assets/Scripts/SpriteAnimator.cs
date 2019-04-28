@@ -66,6 +66,7 @@ public class SpriteAnimator : MonoBehaviour
 
     int _index = 0;
     float _currentTime;
+    int _direction = 1;
 
     bool _loop;
     Action _onEnd;
@@ -92,7 +93,7 @@ public class SpriteAnimator : MonoBehaviour
     {
         _index = 0;
         _currentTime = 0f;
-
+        _direction = 1;
 
         _loop = true;
         _onEnd = null;
@@ -114,14 +115,21 @@ public class SpriteAnimator : MonoBehaviour
         }
     }
 
-    public void StartAnim(string name, Action onEnd = null)
+    public void StartAnim(string name, Action onEnd = null, bool reverse = false)
     {
         CheckMap();
 
         if (_map.ContainsKey(name))
         {
-            InitWith(_map[name], onEnd);
+            InitWith(_map[name], onEnd, reverse ? -1 : 1);
         }
+    }
+
+    public void ReverseCurrentAnim(Action onEnd = null)
+    {
+        _onEnd = onEnd;
+
+        _direction = -_direction;
     }
 
     public void StartAnim(int index, Action onEnd = null)
@@ -131,16 +139,23 @@ public class SpriteAnimator : MonoBehaviour
         InitWith(_anims[index], onEnd);
     }
 
-    void InitWith(AnimationEntry entry, Action onEnd)
+    void InitWith(AnimationEntry entry, Action onEnd, int direction = 1)
     {
-        _index = 0;
+        _direction = direction;
         _currentTime = 0f;
 
         _loop = entry.loop;
         _onEnd = onEnd;
         _current = entry.data;
 
+        _index = GetStartIndex();
+
         Refresh();
+    }
+
+    int GetStartIndex()
+    {
+        return _direction > 0 ? 0 : _current.sprites.Count - 1;
     }
 
     void Update()
@@ -154,13 +169,14 @@ public class SpriteAnimator : MonoBehaviour
     {
         while (_currentTime > _current.spriteTime)
         {
-            _index++;
+            _index += _direction;
 
-            if (_index >= _current.sprites.Count)
+            if ((_direction > 0 && _index >= _current.sprites.Count)
+             || (_direction < 0 && _index < 0))
             {
                 if (_loop)
                 {
-                    _index = 0;
+                    _index = GetStartIndex();
                 }
                 else
                 {

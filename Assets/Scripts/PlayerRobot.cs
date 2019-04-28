@@ -18,6 +18,9 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
     bool _gaveEnergy;
     bool _wasReloading;
 
+    bool _isGettingUp;
+    bool _isGettingDown;
+
     public float speed;
 
     void Awake()
@@ -54,10 +57,40 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
         bool isMoving = direction != 0;
         if (isMoving)
         {
-            HandleOrientation(direction, dt);
+            if (_isGettingDown)
+            {
+                direction = 0;
+                isMoving = false;
+                _isGettingDown = false;
+                _isGettingUp = true;
+                _animator.ReverseCurrentAnim(OnEndGettingUp);
+            }
+            else if (_wasReloading)
+            {
+                direction = 0;
+                isMoving = false;
+                _isGettingUp = true;
+                _animator.StartAnim("getDown", OnEndGettingUp, true);
+            }
+            else if(_isGettingUp || _isGettingDown)
+            {
+                direction = 0;
+                isMoving = false;
+            }
+            else
+            {
+                if(!_isGettingDown)
+                {
+                    HandleOrientation(direction, dt);
+                }
+            }
         }
 
-        bool tryToGiveEnergy = !isMoving && Input.GetKey(KeyCode.Space);
+        bool tryToGiveEnergy = !isMoving 
+                            && !_isGettingUp 
+                            && !_isGettingDown
+                            && Input.GetKey(KeyCode.Space);
+
         bool giveEnergy = false;
 
         if (tryToGiveEnergy)
@@ -72,10 +105,11 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
             }
         }
 
-        bool canReload = !isMoving && !giveEnergy;
-        HandleReloading(canReload, dt);
+        bool canReload = !isMoving && !giveEnergy && !_isGettingUp && !_isGettingDown;
+
         UpdateAnim(direction, giveEnergy, canReload);
 
+        HandleReloading(canReload && !_isGettingUp && !_isGettingDown, dt);
         RefreshCameraPosition();
     }
 
@@ -97,7 +131,12 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
             }
             else if(reload && !_wasReloading)
             {
-                _animator.StartAnim("reload");
+                if(!_isGettingDown)
+                {
+                    _isGettingUp = false;
+                    _isGettingDown = true;
+                    _animator.StartAnim("getDown", OnEndGettingDown);
+                }
             }
             else if (!giveEnergy && _gaveEnergy 
                     || !sameAsPreviousFrame)
@@ -109,6 +148,18 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
         _lastDirection = direction;
         _gaveEnergy = giveEnergy;
         _wasReloading = reload;
+    }
+
+    void OnEndGettingDown()
+    {
+        _isGettingDown = false;
+        _wasReloading = true;
+        _animator.StartAnim("reload");
+    }
+
+    void OnEndGettingUp()
+    {
+        _isGettingUp = false;
     }
 
     float GetGivenEnergy(float dt)
