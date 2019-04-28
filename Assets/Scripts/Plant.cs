@@ -8,16 +8,16 @@ public class Plant : MonoBehaviour
     class Evolve
     {
         public float growingTime;
-        public Sprite sprite;
     }
 
     [SerializeField] int _lifePointMax;
     [SerializeField] int _startingLifePoint;
     [SerializeField] float _regeneration;
     [SerializeField] Evolve[] _evolves;
-    [SerializeField] SpriteRenderer _renderer;
+    [SerializeField] SpriteAnimator _animator;
     [SerializeField] GrowingEngine _growingEngine;
 
+    ElectricLight _light;
     float _currentGrowingTime;
     float _lifePoint;
     int _currentEvolveIndex;
@@ -26,7 +26,8 @@ public class Plant : MonoBehaviour
     {
         _lifePoint = _startingLifePoint;
 
-        _renderer.sprite = _evolves[_currentEvolveIndex].sprite;
+        //_renderer.sprite = _evolves[_currentEvolveIndex].sprite;
+        _animator.StartAnim(_currentEvolveIndex);
     }
 
     void OnEnable()
@@ -42,6 +43,11 @@ public class Plant : MonoBehaviour
         }
     }
 
+    public void SetLight(ElectricLight light)
+    {
+        _light = light;
+    }
+
     public void HandleGrowth(float dt)
     {
         bool water = _growingEngine.RequestWater(dt);
@@ -54,6 +60,11 @@ public class Plant : MonoBehaviour
         else
         {
             Die(light && water ? 2 : 1, dt);
+        }
+
+        if(_lifePoint <= 0)
+        {
+            _animator.StartAnim("die");
         }
     }
 
@@ -68,7 +79,8 @@ public class Plant : MonoBehaviour
         if (_currentGrowingTime > _evolves[_currentEvolveIndex].growingTime)
         {
             _currentEvolveIndex++;
-            _renderer.sprite = _evolves[_currentEvolveIndex].sprite;
+            //_renderer.sprite = _evolves[_currentEvolveIndex].sprite;
+            _animator.StartAnim(_currentEvolveIndex);
             _currentGrowingTime -= _evolves[_currentEvolveIndex].growingTime;
         }
     }
@@ -85,5 +97,10 @@ public class Plant : MonoBehaviour
     void Die(int factor, float dt)
     {
         _lifePoint -= factor * dt * 10; // base 10 coz int
+
+        if(_lifePoint < 0)
+        {
+            _lifePoint = 0;
+        }
     }
 }

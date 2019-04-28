@@ -16,13 +16,9 @@ public class ReceiverManager : MonoSingleton<ReceiverManager>
         _receivers.Remove(receiver);
     }
 
-    // Update is called once per frame
     public void Actualize(float dt)
     {
-        if(PlayerRobot.instance.giveEnergy)
-        {
-
-        }
+        // todo ? 
     }
 
     public Receiver TryToGiveEnergy(Vector2 wpos, float energy)
