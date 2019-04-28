@@ -8,14 +8,13 @@ public class Plant : MonoBehaviour
     class Evolve
     {
         public float growingTime;
-        public Sprite sprite;
     }
 
     [SerializeField] int _lifePointMax;
     [SerializeField] int _startingLifePoint;
     [SerializeField] float _regeneration;
     [SerializeField] Evolve[] _evolves;
-    [SerializeField] SpriteRenderer _renderer;
+    [SerializeField] SpriteAnimator _animator;
     [SerializeField] GrowingEngine _growingEngine;
 
     float _currentGrowingTime;
@@ -26,7 +25,8 @@ public class Plant : MonoBehaviour
     {
         _lifePoint = _startingLifePoint;
 
-        _renderer.sprite = _evolves[_currentEvolveIndex].sprite;
+        //_renderer.sprite = _evolves[_currentEvolveIndex].sprite;
+        _animator.StartAnim(_currentEvolveIndex);
     }
 
     void OnEnable()
@@ -55,6 +55,11 @@ public class Plant : MonoBehaviour
         {
             Die(light && water ? 2 : 1, dt);
         }
+
+        if(_lifePoint <= 0)
+        {
+            _animator.StartAnim("die");
+        }
     }
 
     void Grow(float dt)
@@ -68,7 +73,8 @@ public class Plant : MonoBehaviour
         if (_currentGrowingTime > _evolves[_currentEvolveIndex].growingTime)
         {
             _currentEvolveIndex++;
-            _renderer.sprite = _evolves[_currentEvolveIndex].sprite;
+            //_renderer.sprite = _evolves[_currentEvolveIndex].sprite;
+            _animator.StartAnim(_currentEvolveIndex);
             _currentGrowingTime -= _evolves[_currentEvolveIndex].growingTime;
         }
     }
@@ -85,5 +91,10 @@ public class Plant : MonoBehaviour
     void Die(int factor, float dt)
     {
         _lifePoint -= factor * dt * 10; // base 10 coz int
+
+        if(_lifePoint < 0)
+        {
+            _lifePoint = 0;
+        }
     }
 }

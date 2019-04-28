@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 4122120363190062}
   - component: {fileID: 114607757474949774}
   - component: {fileID: 212582597123588574}
+  - component: {fileID: 114107322109320626}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -192,6 +193,58 @@ Transform:
   m_Father: {fileID: 4114895288366256}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114107322109320626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1527431772709464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c40738278f64c5484d657da0eba252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idle:
+    _spriteTime: 0.1
+    _sprites:
+    - {fileID: 21300000, guid: 289b43f2e974742b7bf91f6b75c23121, type: 3}
+  _anims:
+  - _name: evolve1
+    _loop: 1
+    _data:
+      _spriteTime: 10
+      _sprites:
+      - {fileID: 21300000, guid: 289b43f2e974742b7bf91f6b75c23121, type: 3}
+  - _name: evolve2
+    _loop: 1
+    _data:
+      _spriteTime: 10
+      _sprites:
+      - {fileID: 21300000, guid: a5397868f27c4413096eccfdf0db378c, type: 3}
+  - _name: evolve3
+    _loop: 1
+    _data:
+      _spriteTime: 10
+      _sprites:
+      - {fileID: 21300000, guid: bf57498e157b54038ab19b14c2a5fa8b, type: 3}
+  - _name: evolve4
+    _loop: 1
+    _data:
+      _spriteTime: 10
+      _sprites:
+      - {fileID: 21300000, guid: ea847686ba28d421a8ad3c22e721a361, type: 3}
+  - _name: evolve5
+    _loop: 1
+    _data:
+      _spriteTime: 10
+      _sprites:
+      - {fileID: 21300000, guid: d03f7841d25804a879b9a2c046cd433e, type: 3}
+  - _name: die
+    _loop: 1
+    _data:
+      _spriteTime: 10
+      _sprites:
+      - {fileID: 21300000, guid: f5f6770f86e524bde9084212e06785fc, type: 3}
 --- !u!114 &114111111720476964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,16 +282,11 @@ MonoBehaviour:
   _regeneration: 3
   _evolves:
   - growingTime: 0
-    sprite: {fileID: 21300000, guid: 289b43f2e974742b7bf91f6b75c23121, type: 3}
   - growingTime: 3
-    sprite: {fileID: 21300000, guid: a5397868f27c4413096eccfdf0db378c, type: 3}
   - growingTime: 5
-    sprite: {fileID: 21300000, guid: bf57498e157b54038ab19b14c2a5fa8b, type: 3}
   - growingTime: 8
-    sprite: {fileID: 21300000, guid: ea847686ba28d421a8ad3c22e721a361, type: 3}
   - growingTime: 10
-    sprite: {fileID: 21300000, guid: d03f7841d25804a879b9a2c046cd433e, type: 3}
-  _renderer: {fileID: 212582597123588574}
+  _animator: {fileID: 114107322109320626}
   _growingEngine: {fileID: 114861235836705048}
 --- !u!114 &114861235836705048
 MonoBehaviour:
