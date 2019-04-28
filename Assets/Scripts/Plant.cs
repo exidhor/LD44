@@ -17,6 +17,7 @@ public class Plant : MonoBehaviour
     [SerializeField] SpriteAnimator _animator;
     [SerializeField] GrowingEngine _growingEngine;
 
+    ElectricLight _light;
     float _currentGrowingTime;
     float _lifePoint;
     int _currentEvolveIndex;
@@ -40,6 +41,11 @@ public class Plant : MonoBehaviour
         {
             PlantManager.instance.UnRegister(this);
         }
+    }
+
+    public void SetLight(ElectricLight light)
+    {
+        _light = light;
     }
 
     public void HandleGrowth(float dt)
