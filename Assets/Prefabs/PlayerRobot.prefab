@@ -56,14 +56,14 @@ MonoBehaviour:
   _idle:
     _spriteTime: 0.1
     _sprites:
-    - {fileID: 21300000, guid: 8f546508895d04e82ace6a738991f60e, type: 3}
-    - {fileID: 21300000, guid: ea0f3e13fccea401eaa9f88360293837, type: 3}
-    - {fileID: 21300000, guid: 19e790285ba5648b88b7e748fb243e9a, type: 3}
-    - {fileID: 21300000, guid: ba14368339c074140becc2f0d0e7ae8f, type: 3}
-    - {fileID: 21300000, guid: 6260be1bdba90446eab764890ca6d5ce, type: 3}
-    - {fileID: 21300000, guid: c8d743ae6c4b641f88c428740567eb74, type: 3}
-    - {fileID: 21300000, guid: 6e943c076188c4931b6dc4f0f7823c25, type: 3}
-    - {fileID: 21300000, guid: 77892652d79184ba8ae61e6f52bbf070, type: 3}
+    - {fileID: 21300000, guid: ed01d5fb2fdeced499c56ab871bd5aa0, type: 3}
+    - {fileID: 21300000, guid: ecfba3be62777b6438da3289c2a34b9f, type: 3}
+    - {fileID: 21300000, guid: 1a2522a23258c26428badd0259fb5364, type: 3}
+    - {fileID: 21300000, guid: 135019b7c8c3e514ea67c0c4ae06a971, type: 3}
+    - {fileID: 21300000, guid: 7b6ebcacc7593c5458f3b841b84d763a, type: 3}
+    - {fileID: 21300000, guid: ed7717ddbdf11df46acc453d4adcffb0, type: 3}
+    - {fileID: 21300000, guid: 781bd66c43af09445b615f89fe566367, type: 3}
+    - {fileID: 21300000, guid: a3da42e0a2f39f045952c8bf587f72a3, type: 3}
   _anims:
   - _name: run
     _loop: 1
