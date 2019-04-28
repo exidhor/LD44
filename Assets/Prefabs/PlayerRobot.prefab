@@ -61,7 +61,7 @@ MonoBehaviour:
   - _name: run
     _loop: 1
     _data:
-      _spriteTime: 10
+      _spriteTime: 0.1
       _sprites:
       - {fileID: 21300000, guid: 296e8fa89b7f5432889aaa27f3c02544, type: 3}
       - {fileID: 21300000, guid: 5cd72bf6c31bc42ba90bde97fe6099b4, type: 3}
@@ -70,15 +70,39 @@ MonoBehaviour:
   - _name: reload
     _loop: 1
     _data:
-      _spriteTime: 10
+      _spriteTime: 0.1
       _sprites:
-      - {fileID: 21300000, guid: 979235b2a7ee24c27a9e161ffa5a0c8e, type: 3}
+      - {fileID: 21300000, guid: c177371e85f424b9c8a9a2bfe85eedda, type: 3}
+      - {fileID: 21300000, guid: c132831fe8773489fb5ea23959d9896e, type: 3}
+      - {fileID: 21300000, guid: 8a02fc627a57e403781608398ac5759f, type: 3}
+      - {fileID: 21300000, guid: e671b1d74a37e41b49b8ef028a2e0f12, type: 3}
+      - {fileID: 21300000, guid: 24aaedefe3df94cf2acdc6e1cf3b8c01, type: 3}
+      - {fileID: 21300000, guid: 7167011591a444c6c841dadc5e1715ac, type: 3}
+      - {fileID: 21300000, guid: 52d169135b01e4bfbbdadfb733b21e14, type: 3}
   - _name: giveEnergy
     _loop: 1
     _data:
       _spriteTime: 10
       _sprites:
       - {fileID: 21300000, guid: 833abb90de16346ada46779e5cbc91a0, type: 3}
+  - _name: getDown
+    _loop: 0
+    _data:
+      _spriteTime: 0.1
+      _sprites:
+      - {fileID: 21300000, guid: 964739bf611764624a8c7f5e7bcf82cd, type: 3}
+      - {fileID: 21300000, guid: b7a475aaad0d44524b0bef9489327f11, type: 3}
+      - {fileID: 21300000, guid: edc75c14d4a844bd786598bddc340222, type: 3}
+      - {fileID: 21300000, guid: d7d3813f0e5be41c28e97b66d39df088, type: 3}
+      - {fileID: 21300000, guid: ca689219456774004b63260e5a3cb78d, type: 3}
+      - {fileID: 21300000, guid: 20fd98c10b27b44d497c824bfaf62c34, type: 3}
+      - {fileID: 21300000, guid: 4e3492186d2e54ff9b8d14c2c219b1c3, type: 3}
+      - {fileID: 21300000, guid: 6ca2be3c3843740fc877b9a9a54a2d49, type: 3}
+      - {fileID: 21300000, guid: c6b8dfb1519b342758ed09e36f21cd03, type: 3}
+      - {fileID: 21300000, guid: afeca27d99f77405196dd13536a06eba, type: 3}
+      - {fileID: 21300000, guid: e60258e16e7734808bc2f0e796275c42, type: 3}
+      - {fileID: 21300000, guid: befb4902984e54b3b9a21c63705873a2, type: 3}
+      - {fileID: 21300000, guid: 619f08f36cdc241e7802cc5fe42da017, type: 3}
 --- !u!114 &114870155217811100
 MonoBehaviour:
   m_ObjectHideFlags: 1
