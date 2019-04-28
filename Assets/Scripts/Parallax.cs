@@ -14,21 +14,21 @@ public class Parallax : MonoSingleton<Parallax>
 
     void Start()
     {
-        GameObject[] frontGos = GameObject.FindGameObjectsWithTag("front");
+        GameObject[] frontGos = GameObject.FindGameObjectsWithTag("Front");
 
         for(int i = 0; i < frontGos.Length; i++)
         {
             _front.Add(frontGos[i].transform);
         }
 
-        GameObject[] midGos = GameObject.FindGameObjectsWithTag("mid");
+        GameObject[] midGos = GameObject.FindGameObjectsWithTag("Mid");
 
         for (int i = 0; i < midGos.Length; i++)
         {
             _mid.Add(midGos[i].transform);
         }
 
-        GameObject[] farGos = GameObject.FindGameObjectsWithTag("far");
+        GameObject[] farGos = GameObject.FindGameObjectsWithTag("Far");
 
         for (int i = 0; i < farGos.Length; i++)
         {

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212910121800086550}
   m_Layer: 0
   m_Name: BGFar
-  m_TagString: Untagged
+  m_TagString: Far
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 212338802459145576}
   m_Layer: 0
   m_Name: BGMid
-  m_TagString: Untagged
+  m_TagString: Mid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 212936595291250738}
   m_Layer: 0
   m_Name: BGFront
-  m_TagString: Untagged
+  m_TagString: Front
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
