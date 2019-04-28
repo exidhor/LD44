@@ -963,11 +963,6 @@ Prefab:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1254825532}
-    - target: {fileID: 114450029241937614, guid: 4cb04382bc240489cba6fe371ba7d381,
-        type: 2}
-      propertyPath: _anims.Array.data[3]._data._spriteTime
-      value: 0.05
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cb04382bc240489cba6fe371ba7d381, type: 2}
   m_IsPrefabAsset: 0
