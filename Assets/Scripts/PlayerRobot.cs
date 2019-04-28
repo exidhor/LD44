@@ -32,11 +32,16 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
         _animator.StartIdle();
 
-        RefreshCameraPosition();
+        RefreshCameraPosition(true);
     }
 
-    void RefreshCameraPosition()
+    void RefreshCameraPosition(bool first)
     {
+        float startCamX = first ? 0f : _camera.transform.position.x;
+        float moveX = transform.position.x - startCamX;
+
+        Parallax.instance.Actualize(moveX);
+
         Vector3 pos = _camera.transform.position;
         pos.x = transform.position.x;
         _camera.transform.position = pos;
@@ -114,7 +119,7 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
         UpdateAnim(direction, giveEnergy, canReload);
 
         HandleReloading(canReload && !_isGettingUp && !_isGettingDown, dt);
-        RefreshCameraPosition();
+        RefreshCameraPosition(false);
     }
 
     void UpdateAnim(int direction, bool giveEnergy, bool reload)
