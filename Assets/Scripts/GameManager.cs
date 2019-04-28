@@ -9,7 +9,11 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         float dt = Time.deltaTime;
 
+        PlantManager.instance.CheckForInit();
+
         _player.Actualize(dt);
         ReceiverManager.instance.Actualize(dt);
+        EnergyModuleManager.instance.Actualize();
+        PlantManager.instance.Actualize(dt);
 	}
 }
