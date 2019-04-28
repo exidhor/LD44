@@ -105,7 +105,11 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
             }
         }
 
-        bool canReload = !isMoving && !giveEnergy && !_isGettingUp && !_isGettingDown;
+        bool canReload = !isMoving 
+                      && !giveEnergy 
+                      && !_isGettingUp 
+                      && !_isGettingDown
+                      && Outside.instance.IsOutside(transform.position);
 
         UpdateAnim(direction, giveEnergy, canReload);
 
