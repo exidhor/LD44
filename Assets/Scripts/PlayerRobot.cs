@@ -11,6 +11,7 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
     public float givenEnergySpeed;
     public Slider energySlider;
     [SerializeField] SpriteAnimator _animator;
+    [SerializeField] GameObject _camera;
 
     // for anims
     int _lastDirection;
@@ -27,6 +28,15 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
         _lastDirection = -1000000;
 
         _animator.StartIdle();
+
+        RefreshCameraPosition();
+    }
+
+    void RefreshCameraPosition()
+    {
+        Vector3 pos = _camera.transform.position;
+        pos.x = transform.position.x;
+        _camera.transform.position = pos;
     }
 
     public void Actualize(float dt)
@@ -65,6 +75,8 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
         bool canReload = !isMoving && !giveEnergy;
         HandleReloading(canReload, dt);
         UpdateAnim(direction, giveEnergy, canReload);
+
+        RefreshCameraPosition();
     }
 
     void UpdateAnim(int direction, bool giveEnergy, bool reload)

@@ -93,6 +93,7 @@ MonoBehaviour:
   givenEnergySpeed: 30
   energySlider: {fileID: 0}
   _animator: {fileID: 114450029241937614}
+  _camera: {fileID: 0}
   speed: 0.6
 --- !u!212 &212034609107172586
 SpriteRenderer:
