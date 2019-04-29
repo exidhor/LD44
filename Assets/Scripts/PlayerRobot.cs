@@ -5,13 +5,14 @@ using Tools;
 
 public class PlayerRobot : MonoSingleton<PlayerRobot>
 {
-    public float maxEnergy;
-    public float energy;
-    public float reloadingSpeed;
-    public float givenEnergySpeed;
-    public Slider energySlider;
+    [SerializeField] float _speed;
+    [SerializeField] float _maxEnergy;
+    [SerializeField] float _startEnergy;
+    [SerializeField] float _reloadingSpeed;
+    [SerializeField] float _givenEnergySpeed;
     [SerializeField] SpriteAnimator _animator;
     [SerializeField] GameObject _camera;
+    [SerializeField] BatteryLife _batteryLife;
 
     // for anims
     int _lastDirection;
@@ -21,18 +22,25 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
     bool _isGettingUp;
     bool _isGettingDown;
 
-    public float speed;
+    float _energy;
 
     void Awake()
     {
-        energy = maxEnergy;
-        energySlider.value = energy / maxEnergy;
+        SetEnergy(_startEnergy);
 
         _lastDirection = -1000000;
 
         _animator.StartIdle();
 
         RefreshCameraPosition(true);
+    }
+
+    void SetEnergy(float energy)
+    {
+        _energy = energy;
+        _batteryLife.Refresh(_animator.GetCurrentName(),
+                             _animator.GetCurrentIndex(),
+                             _energy / _maxEnergy);
     }
 
     void RefreshCameraPosition(bool first)
@@ -105,7 +113,7 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
             if (receiver != null)
             {
-                energy -= givenEnergy;
+                _energy -= givenEnergy;
                 giveEnergy = true;
             }
         }
@@ -173,11 +181,11 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
     float GetGivenEnergy(float dt)
     {
-        float givenEnergy = givenEnergySpeed * dt;
+        float givenEnergy = _givenEnergySpeed * dt;
 
-        if (givenEnergy > energy)
+        if (givenEnergy > _energy)
         {
-            return energy;
+            return _energy;
         }
 
         return givenEnergy;
@@ -185,7 +193,7 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
     void HandleOrientation(int direction, float dt)
     {
-        float xMove = speed * direction * dt;
+        float xMove = _speed * direction * dt;
         Vector3 move = new Vector3(xMove, 0, 0);
 
         transform.position += move;
@@ -197,16 +205,18 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
     void HandleReloading(bool canReload, float dt)
     {
+        float energy = _energy;
+
         if (canReload)
         {
-            energy += reloadingSpeed * dt;
+            energy += _reloadingSpeed * dt;
 
-            if (energy > maxEnergy)
+            if (_energy > _maxEnergy)
             {
-                energy = maxEnergy;
+                energy = _maxEnergy;
             }
         }
 
-        energySlider.value = energy / maxEnergy;
+        SetEnergy(energy);
     }
 }
