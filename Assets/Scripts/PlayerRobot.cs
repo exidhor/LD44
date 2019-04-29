@@ -24,6 +24,27 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
     float _energy;
 
+    [SerializeField] Vector2 _centerCollider;
+    [SerializeField] Vector2 _sizeCollider = Vector2.one;
+
+    public Rect GetCollider(Vector2 pos)
+    {
+        Vector2 center = _centerCollider + pos;
+        Vector2 size = _sizeCollider;
+
+        return new Rect(center.x - size.x / 2,
+                        center.y - size.y / 2,
+                        size.x,
+                        size.y);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Rect rect = GetCollider(transform.position);
+        Gizmos.DrawWireCube(rect.center, rect.size);
+    }
+
     void Awake()
     {
         SetEnergy(_startEnergy);
@@ -196,7 +217,14 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
         float xMove = _speed * direction * dt;
         Vector3 move = new Vector3(xMove, 0, 0);
 
-        transform.position += move;
+        Vector3 newPos = transform.position + move;
+
+        if(!ColliderManager.instance.IsPossiblePosition(GetCollider(newPos)))
+        {
+            return;
+        }
+
+        transform.position = newPos;
 
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * direction;

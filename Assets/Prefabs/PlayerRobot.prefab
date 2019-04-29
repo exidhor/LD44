@@ -222,6 +222,8 @@ MonoBehaviour:
   _animator: {fileID: 114450029241937614}
   _camera: {fileID: 0}
   _batteryLife: {fileID: 114747952451000044}
+  _centerCollider: {x: 0, y: -0.03}
+  _sizeCollider: {x: 0.1, y: 0.25}
 --- !u!212 &212034609107172586
 SpriteRenderer:
   m_ObjectHideFlags: 1
