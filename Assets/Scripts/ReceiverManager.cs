@@ -18,7 +18,10 @@ public class ReceiverManager : MonoSingleton<ReceiverManager>
 
     public void Actualize(float dt)
     {
-        // todo ? 
+        for(int i = 0; i < _receivers.Count; i++)
+        {
+            _receivers[i].Actualize(dt);
+        }
     }
 
     public Receiver TryToGiveEnergy(Vector2 wpos, float energy)
