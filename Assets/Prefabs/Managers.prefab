@@ -327,8 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecfd926022614f6496e08ccddf8121b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frontFactor: 0.5
-  _midFactor: -0.08
+  _frontFactor: 0.07
+  _midFactor: -0.07
   _farFactor: -0.13
 --- !u!114 &114814280895200936
 MonoBehaviour:
