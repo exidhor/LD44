@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ec23b04366741c2b83fc84c73ea858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _centerCollider: {x: 0, y: 0}
+  _centerCollider: {x: 0.48, y: 0}
   _sizeCollider: {x: 10, y: 2}
 --- !u!114 &114749770684215976
 MonoBehaviour:
@@ -255,8 +255,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frontFactor: 0.2
-  _midFactor: -0.2
-  _farFactor: -0.13333334
+  _midFactor: -0.13
+  _farFactor: -0.35
 --- !u!114 &114814280895200936
 MonoBehaviour:
   m_ObjectHideFlags: 1

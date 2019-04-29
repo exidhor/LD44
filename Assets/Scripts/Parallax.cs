@@ -45,7 +45,7 @@ public class Parallax : MonoSingleton<Parallax>
 
     void SetLayer(List<Transform> transforms, float moveX, float factor)
     {
-        float move = moveX *_farFactor;
+        float move = moveX * factor;
 
         for(int i = 0; i < transforms.Count; i++)
         {
