@@ -27,7 +27,15 @@ public class ReceiverManager : MonoSingleton<ReceiverManager>
 
         if(receiver != null)
         {
-            receiver.OnReloading(energy);
+            if(receiver.canReceiveEnergy)
+            {
+                receiver.OnReloading(energy);
+            }
+            else
+            {
+                Debug.Log("Not Linked !");
+                receiver = null;
+            }
         }
 
         return receiver;
