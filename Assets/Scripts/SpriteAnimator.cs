@@ -70,6 +70,7 @@ public class SpriteAnimator : MonoBehaviour
 
     bool _loop;
     Action _onEnd;
+    string _currentName;
     AnimationData _current = null;
 
     void Awake()
@@ -99,6 +100,8 @@ public class SpriteAnimator : MonoBehaviour
         _onEnd = null;
         _current = _idle;
 
+        _currentName = "idle";
+
         Refresh();
     }
 
@@ -115,8 +118,19 @@ public class SpriteAnimator : MonoBehaviour
         }
     }
 
+    public string GetCurrentName()
+    {
+        return _currentName;
+    }
+
+    public int GetCurrentIndex()
+    {
+        return _index;
+    }
+
     public void StartAnim(string name, Action onEnd = null, bool reverse = false)
     {
+        _currentName = name;
         CheckMap();
 
         if (_map.ContainsKey(name))
@@ -134,6 +148,8 @@ public class SpriteAnimator : MonoBehaviour
 
     public void StartAnim(int index, Action onEnd = null)
     {
+        _currentName = _anims[index].name; 
+
         CheckMap();
 
         InitWith(_anims[index], onEnd);

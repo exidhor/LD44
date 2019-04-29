@@ -5,13 +5,14 @@ using Tools;
 
 public class PlayerRobot : MonoSingleton<PlayerRobot>
 {
-    public float maxEnergy;
-    public float energy;
-    public float reloadingSpeed;
-    public float givenEnergySpeed;
-    public Slider energySlider;
+    [SerializeField] float _speed;
+    [SerializeField] float _maxEnergy;
+    [SerializeField] float _startEnergy;
+    [SerializeField] float _reloadingSpeed;
+    [SerializeField] float _givenEnergySpeed;
     [SerializeField] SpriteAnimator _animator;
     [SerializeField] GameObject _camera;
+    [SerializeField] BatteryLife _batteryLife;
 
     // for anims
     int _lastDirection;
@@ -21,22 +22,55 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
     bool _isGettingUp;
     bool _isGettingDown;
 
-    public float speed;
+    float _energy;
+
+    [SerializeField] Vector2 _centerCollider;
+    [SerializeField] Vector2 _sizeCollider = Vector2.one;
+
+    public Rect GetCollider(Vector2 pos)
+    {
+        Vector2 center = _centerCollider + pos;
+        Vector2 size = _sizeCollider;
+
+        return new Rect(center.x - size.x / 2,
+                        center.y - size.y / 2,
+                        size.x,
+                        size.y);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Rect rect = GetCollider(transform.position);
+        Gizmos.DrawWireCube(rect.center, rect.size);
+    }
 
     void Awake()
     {
-        energy = maxEnergy;
-        energySlider.value = energy / maxEnergy;
+        SetEnergy(_startEnergy);
 
         _lastDirection = -1000000;
 
         _animator.StartIdle();
 
-        RefreshCameraPosition();
+        RefreshCameraPosition(true);
     }
 
-    void RefreshCameraPosition()
+    void SetEnergy(float energy)
     {
+        _energy = energy;
+        _batteryLife.Refresh(_animator.GetCurrentName(),
+                             _animator.GetCurrentIndex(),
+                             _energy / _maxEnergy);
+    }
+
+    void RefreshCameraPosition(bool first)
+    {
+        float startCamX = first ? 0f : _camera.transform.position.x;
+        float moveX = transform.position.x - startCamX;
+
+        Parallax.instance.Actualize(moveX);
+
         Vector3 pos = _camera.transform.position;
         pos.x = transform.position.x;
         _camera.transform.position = pos;
@@ -100,17 +134,21 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
             if (receiver != null)
             {
-                energy -= givenEnergy;
+                _energy -= givenEnergy;
                 giveEnergy = true;
             }
         }
 
-        bool canReload = !isMoving && !giveEnergy && !_isGettingUp && !_isGettingDown;
+        bool canReload = !isMoving 
+                      && !giveEnergy 
+                      && !_isGettingUp 
+                      && !_isGettingDown
+                      && Outside.instance.IsOutside(transform.position);
 
         UpdateAnim(direction, giveEnergy, canReload);
 
         HandleReloading(canReload && !_isGettingUp && !_isGettingDown, dt);
-        RefreshCameraPosition();
+        RefreshCameraPosition(false);
     }
 
     void UpdateAnim(int direction, bool giveEnergy, bool reload)
@@ -164,11 +202,11 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
     float GetGivenEnergy(float dt)
     {
-        float givenEnergy = givenEnergySpeed * dt;
+        float givenEnergy = _givenEnergySpeed * dt;
 
-        if (givenEnergy > energy)
+        if (givenEnergy > _energy)
         {
-            return energy;
+            return _energy;
         }
 
         return givenEnergy;
@@ -176,10 +214,17 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
     void HandleOrientation(int direction, float dt)
     {
-        float xMove = speed * direction * dt;
+        float xMove = _speed * direction * dt;
         Vector3 move = new Vector3(xMove, 0, 0);
 
-        transform.position += move;
+        Vector3 newPos = transform.position + move;
+
+        if(!ColliderManager.instance.IsPossiblePosition(GetCollider(newPos)))
+        {
+            return;
+        }
+
+        transform.position = newPos;
 
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * direction;
@@ -188,16 +233,18 @@ public class PlayerRobot : MonoSingleton<PlayerRobot>
 
     void HandleReloading(bool canReload, float dt)
     {
+        float energy = _energy;
+
         if (canReload)
         {
-            energy += reloadingSpeed * dt;
+            energy += _reloadingSpeed * dt;
 
-            if (energy > maxEnergy)
+            if (_energy > _maxEnergy)
             {
-                energy = maxEnergy;
+                energy = _maxEnergy;
             }
         }
 
-        energySlider.value = energy / maxEnergy;
+        SetEnergy(energy);
     }
 }

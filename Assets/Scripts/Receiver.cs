@@ -3,6 +3,11 @@ using System.Collections;
 
 public abstract class Receiver : MonoBehaviour
 {
+    public virtual bool canReceiveEnergy
+    {
+        get { return true; }
+    }
+
     [SerializeField] Vector2 _centerCollider;
     [SerializeField] Vector2 _sizeCollider = Vector2.one;
 

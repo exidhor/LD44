@@ -3,10 +3,25 @@ using System.Collections;
 
 public class GrowingEngine : Receiver
 {
-    public float maxEnergy;
-    public float _energy;
-    public float _energyDrain;
-    public EnergyModule energyModule;
+    [SerializeField] float maxEnergy;
+    [SerializeField] float _energy;
+    [SerializeField] float _energyDrain;
+    [SerializeField] EnergyModule energyModule;
+    [SerializeField] GeneratorType _generatorType;
+
+    bool isLinked
+    {
+        get
+        {
+            return _generatorType == GeneratorType.None
+                || GeneratorManager.instance.IsGeneratorOn(_generatorType);
+        }
+    }
+
+    public override bool canReceiveEnergy
+    {
+        get { return isLinked; }
+    }
 
     public override void OnReloading(float energy)
     {
@@ -22,10 +37,7 @@ public class GrowingEngine : Receiver
 
     public override void Actualize(float dt)
     {
-        //if(_energy > 0)
-        //{
-        //    Debug.Log("Plant Grow");
-        //}
+        // todo ? 
     }
 
     public bool RequestWater(float dt)
